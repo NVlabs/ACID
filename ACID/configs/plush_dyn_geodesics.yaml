@@ -1,0 +1,58 @@
+method: conv_onet
+data:
+  flow_path: train_data/flow
+  pair_path: train_data/pair
+  pointcloud_n_obj: 5000
+  pointcloud_n_env: 1000
+  pointcloud_noise: 0.005
+  points_subsample: 3000
+model:
+  type: combined
+  obj_encoder_kwargs:
+    f_dim: 3
+    hidden_dim: 64
+    plane_resolution: 128
+    unet_kwargs:
+      depth: 4
+      merge_mode: concat
+      start_filts: 64
+  env_encoder_kwargs:
+    f_dim: 3
+    hidden_dim: 16
+    plane_resolution: 64
+    unet_kwargs:
+      depth: 2
+      merge_mode: concat
+      start_filts: 16
+  decoder_kwargs:
+    corr_dim: 32
+    sample_mode: bilinear # bilinear / nearest
+    hidden_size: 32
+  obj_c_dim: 64
+  env_c_dim: 16
+loss:
+  type: contrastive
+  contrastive_threshold: 1
+  use_geodesics: true
+  scale_with_geodesics: False
+training:
+  out_dir: result/dyn/geodesics 
+  batch_size: 4
+  model_selection_metric: flow
+  model_selection_mode: minimize
+  print_every: 1
+  visualize_every: 4000 
+  validate_every: 4000
+  checkpoint_every: 4000
+  backup_every: 4000
+  n_workers: 16
+  n_workers_val: 4
+test:
+  threshold: 0.95
+  eval_mesh: true
+  eval_pointcloud: false
+  model_file: model_best.pt
+generation:
+  refine: false
+  n_x: 128
+  n_z: 1
