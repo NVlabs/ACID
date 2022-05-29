@@ -9,7 +9,7 @@
 <img src="_media/model_figure.png" width="600"/>
 </div>
 
-This repository contains the codebase used in [**ACID: Action-Conditional Implicit Visual Dynamics for Deformable Object Manipulation**](https://b0ku1.github.io/acid/). Specifically, the repo contains code for:
+This repository contains the codebase used in [**ACID: Action-Conditional Implicit Visual Dynamics for Deformable Object Manipulation**](https://b0ku1.github.io/acid/), which will appear in [RSS 2022](https://roboticsconference.org/program/papers/) and is nominated for Best Student Paper Award. Specifically, the repo contains code for:
 * [**PlushSim**](./PlushSim/), the simulation environment used to generate all manipulation data.
 * [**ACID model**](./ACID/), the implicit visual dynamics model's model and training code.
 
